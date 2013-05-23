@@ -1,8 +1,15 @@
 var express = require('express');
-var app = express();
+var http = require('http');
 
-app.get('/', function(request, response) {
-  response.send('hello world');
+var app = express();
+var server = http.createServer(app);
+
+app.get('/', function(req, res) {
+  res.send('hello world');
 });
 
-app.listen(3000)
+server.listen(8000);
+
+app.configure( function() {
+  console.log('Express server listening on port %d in %s mode', server.address().port, app.settings.env);
+});
